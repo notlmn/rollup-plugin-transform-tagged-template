@@ -92,6 +92,10 @@ const result = handleCSS`
 ]
 ```
 
+## Related
+
+- [rollup-plugin-minify-tagged-css-template](https://github.com/notlmn/rollup-plugin-minify-tagged-css-template) - Rollup plugin to minify CSS content of tagged template string literals.
+
 ## License
 
 [MIT](license) &copy; Laxman Damera
