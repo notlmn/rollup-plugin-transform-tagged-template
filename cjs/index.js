@@ -16,10 +16,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function transformTaggedContent(content, options = {}) {
   const {
+    parserOptions = {},
     tagsToProcess = [],
     transformer = code => code
   } = options;
-  const ast = (0, _parser.parse)(content);
+  const ast = (0, _parser.parse)(content, parserOptions);
   (0, _traverse.default)(ast, {
     TaggedTemplateExpression(path) {
       if (tagsToProcess.includes(path.node.tag.name)) {
