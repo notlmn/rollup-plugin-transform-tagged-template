@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-transform-tagged-template",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Apply transformations on static contents of tagged template string literals",
   "homepage": "https://github.com/notlmn/rollup-plugin-transform-tagged-template#readme",
   "repository": {
