@@ -4,11 +4,12 @@ import generate from '@babel/generator';
 
 export function transformTaggedContent(content, options = {}) {
 	const {
+		parserOptions = {},
 		tagsToProcess = [],
 		transformer = code => code
 	} = options;
 
-	const ast = parse(content);
+	const ast = parse(content, parserOptions);
 
 	traverse(ast, {
 		TaggedTemplateExpression(path) {
