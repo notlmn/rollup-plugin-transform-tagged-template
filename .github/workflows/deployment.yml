@@ -1,0 +1,44 @@
+name: Deployment
+
+on:
+  release:
+    types: [created]
+
+jobs:
+
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm install
+    - run: npm run build
+    - run: npm test
+
+  Validate:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+    run: |
+      PACKAGE_VERSION="$(cat package.json | jq -r .version)"
+      GH_TAG="$(echo $GITHUB_REF | sed 's/\/refs\/tags\///g')"
+      if [ "$PACKAGE_VERSION" ==  "$GH_TAG" ]; then
+          echo "Using version \"$PACKAGE_VERSION\" for publishing"
+          echo "::set-output name=is-valid-version::yes"
+      else
+          echo "Version in 'package.json' ($PACKAGE_VERSION) and created release ($GH_TAG) do not match."
+          echo "Try updating version in 'package.json' before continuing."
+          echo "Skipping publishing!"
+      fi
+
+  Publish:
+    needs: Validate
+    runs-on: ubuntu-latest
+    if: needs.Validate.is-valid-version.created
+    steps:
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
