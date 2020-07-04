@@ -38,5 +38,10 @@
     "@babel/generator": "^7.10.3",
     "@babel/parser": "^7.10.3",
     "@babel/traverse": "^7.10.3"
+  },
+  "xo": {
+    "rules": {
+      "no-unused-vars": "off"
+    }
   }
 }
