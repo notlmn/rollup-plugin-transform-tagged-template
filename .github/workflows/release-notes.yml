@@ -11,10 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        fetch-depth: 100
-    - uses: notlmn/release-with-changelog@v1
+        fetch-depth: 20
+    - uses: notlmn/release-with-changelog@v2
       with:
         include-hash: true
         include-range: true
-      env:
-        RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
