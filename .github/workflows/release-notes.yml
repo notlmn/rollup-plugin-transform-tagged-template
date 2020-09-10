@@ -1,0 +1,19 @@
+name: Release Notes
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 20
+    - uses: notlmn/release-with-changelog@v2
+      with:
+        include-hash: true
+        include-range: true
+        token: ${{ secrets.GITHUB_TOKEN }}
