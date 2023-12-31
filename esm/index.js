@@ -1,7 +1,9 @@
-import {parse, ParserOptions} from '@babel/parser';
-import traverse from '@babel/traverse';
+import babelParser from '@babel/parser';
 import generate from '@babel/generator';
+import traverse from '@babel/traverse';
 import * as rollup from 'rollup';
+
+const {parse, ParserOptions} = babelParser;
 
 /**
  * @param {string} code
@@ -27,12 +29,12 @@ export function transformTaggedContent(content, options = {}) {
 	const {
 		parserOptions = {},
 		tagsToProcess = [],
-		transformer = defaultTransformer
+		transformer = defaultTransformer,
 	} = options;
 
 	const ast = parse(content, parserOptions);
 
-	traverse(ast, {
+	traverse.default(ast, {
 		TaggedTemplateExpression(path) {
 			if (tagsToProcess.includes(path.node.tag.name)) {
 				for (const quasi of path.node.quasi.quasis) {
@@ -41,10 +43,10 @@ export function transformTaggedContent(content, options = {}) {
 					quasi.value.cooked = transformedData;
 				}
 			}
-		}
+		},
 	});
 
-	return generate(ast);
+	return generate.default(ast);
 }
 
 /**
@@ -56,6 +58,6 @@ export default function transformTaggedTemplate(options = {}) {
 		name: 'transform-tagged-template',
 		transform(content) {
 			return transformTaggedContent(content, options);
-		}
+		},
 	};
 }

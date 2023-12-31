@@ -24,9 +24,9 @@
   "author": "Laxman Damera",
   "license": "MIT",
   "devDependencies": {
-    "rollup": "^2.18.0",
+    "rollup": "^4.9.1",
     "ucjs": "^0.1.1",
-    "xo": "^0.32.0"
+    "xo": "^0.56.0"
   },
   "module": "./esm/index.js",
   "type": "module",
@@ -35,9 +35,9 @@
     "default": "./cjs/index.js"
   },
   "dependencies": {
-    "@babel/generator": "^7.10.3",
-    "@babel/parser": "^7.10.3",
-    "@babel/traverse": "^7.10.3"
+    "@babel/generator": "^7.23.6",
+    "@babel/parser": "^7.23.6",
+    "@babel/traverse": "^7.23.7"
   },
   "xo": {
     "rules": {
